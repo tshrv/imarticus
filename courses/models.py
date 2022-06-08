@@ -37,7 +37,8 @@ class Module(models.Model):
 class Lecture(models.Model):
     module = models.ForeignKey(Module, on_delete=models.CASCADE)
     title = models.CharField(max_length=255, blank=False, null=False)
-    duration = models.PositiveIntegerField(blank=False, null=False)
+    # duration in seconds
+    duration = models.PositiveIntegerField('Duration(s)', blank=False, null=False)
     position_in_sequence = models.PositiveSmallIntegerField(default=1, null=False, blank=False)
 
     class Meta:
