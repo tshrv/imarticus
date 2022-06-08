@@ -13,8 +13,8 @@
 
 <div class="p-4 mx-4 d-flex flex-column bg-light shadow-md">
   <div class="d-flex flex-row">
-    <img src="{% static 'course.thumbnail' %}" alt="Course thumbnail">
-    <h4 class="fs-2">{{course.title}}</h4>
+    <img src="{{course.thumbnail.url}}" alt="Course thumbnail" class="course-thumbnail">
+    <h4 class="p-4 fs-2">{{course.title}}</h4>
   </div>
 
   <div class="accordion" id="course-details-accordion">

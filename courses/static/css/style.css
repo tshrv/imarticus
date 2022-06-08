@@ -27,3 +27,7 @@ body {
 .min-h-viewport {
     min-height: 100vh;
 }
+
+.course-thumbnail {
+    max-height: 10rem;
+}
