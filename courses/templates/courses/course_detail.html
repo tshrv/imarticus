@@ -1,16 +1,58 @@
 {% extends 'courses/base.html' %}
-
+{% load static %}
 {% block head_title %}{{course.title}}{% endblock %}
+{% block course_title %}{{course.title}}{% endblock %}
+
 
 {% block content %}
+<div class="p-4 mx-4 d-flex flex-column border-bottom border-3">
+  <div class="fw-semibold text-success">
+    <span>All Courses > {{course.title}}</span>
+  </div>
+</div>
 
-{% for module in course.modules %}
+<div class="p-4 mx-4 d-flex flex-column bg-light shadow-md">
+  <div class="d-flex flex-row">
+    <img src="{% static 'course.thumbnail' %}" alt="Course thumbnail">
+    <h4 class="fs-2">{{course.title}}</h4>
+  </div>
 
-  <h2>{{module.title}}</h2>
+  <div class="accordion" id="course-details-accordion">
+    {% for module in course.modules %}
+
+    <div class="accordion-item my-2">
+      <h2 class="accordion-header" id="heading{{module.id}}">
+        <button class="accordion-button collapsed fs-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{module.id}}" aria-expanded="false" aria-controls="collapse{{module.id}}">
+          {{forloop.counter}}. {{module.title}}
+          <span class="fs-6 text-muted px-4">
+            {% with lecture_count=module.lectures_count %}
+              {{ lecture_count }} Lecture{{ lecture_count|pluralize }}
+            {% endwith %}
+          </span>
+        </button>
+      </h2>
+
+      <div id="collapse{{module.id}}" class="accordion-collapse collapse" aria-labelledby="heading{{module.id}}" data-bs-parent="#course-details-accordion">
+        <div class="accordion-body">
+          <div class="d-flex flex-column">
+            {% for lecture in module.lectures %}
+            <div class="d-flex flex-row ">
+              <a href="#" class="text-decoration-none text-black fs-6 flex-grow-1">{{forloop.counter}}. {{lecture.title}}</a>
+              <span class="text-muted fs-6">{{lecture.duration|seconds_to_mmss}}</span>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+    </div>
+    {% endfor %}
   
-  {% for lecture in module.lectures %}
-    <h3>{{forloop.counter}}. {{lecture.title}}  | {{lecture.duration|seconds_to_mmss}}</h3>
-  {% endfor %}
+  </div>
+</div>
 
-{% endfor %}
 {% endblock %}
+
+
+
+
