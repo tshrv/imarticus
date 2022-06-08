@@ -34,6 +34,11 @@ class Module(models.Model):
     def lectures(self) -> models.QuerySet:
         logger.debug(type(self.lecture_set.all()))
         return self.lecture_set.all()
+    
+    @property
+    def lectures_count(self) -> models.QuerySet:
+        return self.lectures.count()
+    
 class Lecture(models.Model):
     module = models.ForeignKey(Module, on_delete=models.CASCADE)
     title = models.CharField(max_length=255, blank=False, null=False)
