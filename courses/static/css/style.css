@@ -14,10 +14,6 @@ body {
     margin-left: 2rem;
 }
 
-.nav-link:hover {
-    background-color: #055646;
-    color: white;
-}
 
 .nav-link-active {
     border-left: 0.5rem solid white;
@@ -30,4 +26,8 @@ body {
 
 .course-thumbnail {
     max-height: 10rem;
+}
+
+.certificate-img {
+    max-height: 5rem;
 }
